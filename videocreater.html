@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="jquery-ui.css">
+  <script src="jquery.js"></script>
+  <script src="jquery-ui.js"></script>
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ 
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<link href="icon.css" rel="stylesheet">
+
+
+<div id="video_container">
+<video id="videoplayer" class="z-depth-3" src="test.mp4" onclick="playvid('videoplayer')" style="position:absolute; width:100%;">
+  Your browser does not support the <code>video</code> element.
+  
+
+</video >
+  <div id="cover"><a id="play_pause"href="#play"><i class="medium material-icons" onclick="playvid('videoplayer')">play_circle_filled</i></a><a href="#mute" id="mute_unmute"><i class="medium material-icons" onclick="mute('videoplayer')">volume_off</i></a><p class="range-field">
+      <input type="range" id="position_video" min="0" max="100" />
+    </p></div>
+</div>
+<toolbar>
+  <button onclick="playvid('videoplayer')">Play the Audio</button>
+  <button onclick="increasevol('videoplayer')">Increase Volume</button>
+  <button onclick="decreasevol('videoplayer')">Decrease Volume</button>
+</toolbar>
+
+
+<style>
+#video_container{
+position:absolute;
+height:100%;
+width:100%;
+}
+
+#cover
+{
+position:absolute;
+z-index:100;
+top:0%;
+width:100%;
+height:60px;
+left:0%;
+}
+
+input{border:0px solid white;}
+p{border:0px solid white;}
+</style>
+
+
+
+<script>
+var a=0;
+var cur_volume=0.5;
+var max_vol=1.0;
+var lowest_vol=0.0;
+
+
+
+var initialize=function(b)
+{
+document.getElementById(b).volume=0.5;
+document.getElementById(b).play();
+document.getElementById('play_pause').innerHTML='<i class="medium material-icons center" onclick="playvid('+"'videoplayer'"+')">pause_circle_filled</i>';
+a=1;
+}
+
+
+var playvid=function(b)
+{
+
+if(a==0)
+	{document.getElementById(b).play();
+	document.getElementById('play_pause').innerHTML='<i class="medium material-icons center" onclick="playvid('+"'videoplayer'"+')">pause_circle_filled</i>';
+	a=1;
+	
+	}
+else{document.getElementById(b).pause();
+	document.getElementById('play_pause').innerHTML='<i class="medium material-icons center" onclick="playvid('+"'videoplayer'"+')">play_circle_filled</i>';
+	a=0;
+	}
+	
+
+}
+
+
+var increasevol=function(b)
+{
+document.getElementById(b).volume+=0.1;
+
+cur_volume=document.getElementById(b).volume;
+}
+
+var mute=function(b)
+{
+document.getElementById(b).volume=0;
+document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons center" onclick="unmute('+"'videoplayer'"+')">volume_mute</i>';
+
+}
+
+
+var unmute=function(b)
+{
+document.getElementById(b).volume=cur_volume;
+document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons center" onclick="mute('+"'videoplayer'"+')">volume_off</i>';
+}
+
+
+var decreasevol=function(b)
+{
+document.getElementById(b).volume-=0.1;
+cur_volume=document.getElementById(b).volume;
+}
+
+
+initialize('videoplayer');
+</script>
+
