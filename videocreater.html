@@ -157,6 +157,14 @@ document.getElementById(b).currentTime=(pos/100)*total;
 }
 
 
+
+var changeplaybackrate=function(b,a)
+{
+if(document.getElementById(b).playbackRate<=2)
+document.getElementById(b).playbackRate+=a;
+}
+
+
 setInterval(function(){updaterange('videoplayer');}, 1);
 //===================key events
 
@@ -181,6 +189,13 @@ function checkKey(e) {
     }
     else if (e.keyCode == '32') {
        playvid('videoplayer');
+    }
+    else if (e.keyCode == '109') {
+       changeplaybackrate('videoplayer',-0.4);
+    }
+    
+    else if (e.keyCode == '107') {
+       changeplaybackrate('videoplayer',+0.4);
     }
 
 }
