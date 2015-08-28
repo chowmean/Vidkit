@@ -60,7 +60,7 @@ var a=0;
 var cur_volume=0.5;
 var max_vol=1.0;
 var lowest_vol=0.0;
-
+var ismute=0;
 
 
 var initialize=function(b)
@@ -98,6 +98,7 @@ var mute=function(b)
 document.getElementById(b).volume=0;
 document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons right" onclick="unmute('+"'videoplayer'"+')">volume_mute</i>';
 document.getElementById('position_volume').value=0;
+ismute=1;
 }
 
 
@@ -106,6 +107,7 @@ var unmute=function(b)
 document.getElementById(b).volume=cur_volume;
 document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons right" onclick="mute('+"'videoplayer'"+')">volume_off</i>';
 document.getElementById('position_volume').value=cur_volume*10;
+ismute=0;
 }
 
 
@@ -196,6 +198,11 @@ function checkKey(e) {
     
     else if (e.keyCode == '107') {
        changeplaybackrate('videoplayer',+0.4);
+    }
+    else if (e.keyCode == '77') {
+       if(ismute==0)mute('videoplayer');
+    	else
+    	unmute('videoplayer');
     }
 
 }
