@@ -23,8 +23,8 @@
 </div>
 <toolbar>
   <button onclick="playvid('videoplayer')">Play the Audio</button>
-  <button onclick="increasevol('videoplayer')">Increase Volume</button>
-  <button onclick="decreasevol('videoplayer')">Decrease Volume</button>
+  <button onclick="jumptotime('videoplayer',10.00)">Jump 10sec</button>
+  <button onclick="jumptotime('videoplayer',-10.00)">Back 10sec</button>
 </toolbar>
 
 
@@ -47,6 +47,11 @@ left:0%;
 
 input{border:0px solid white;}
 p{border:0px solid white;}
+
+toolbar{
+position:absolute;
+top:100%;
+}
 </style>
 
 
@@ -65,6 +70,7 @@ document.getElementById(b).volume=0.5;
 document.getElementById(b).play();
 document.getElementById('play_pause').innerHTML='<i class="medium material-icons center" onclick="playvid('+"'videoplayer'"+')">pause_circle_filled</i>';
 a=1;
+console.log(document.getElementById(b).currentTime);
 }
 
 
@@ -115,6 +121,44 @@ cur_volume=document.getElementById(b).volume;
 }
 
 
+var jumptotime=function(b,a)
+{
+document.getElementById(b).currentTime+=a;
+}
+
 initialize('videoplayer');
+
+
+
+
+
+
+
+
+//===================key events
+
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+        increasevol('videoplayer');
+    }
+    else if (e.keyCode == '40') {
+       decreasevol('videoplayer');
+    }
+    else if (e.keyCode == '37') {
+       jumptotime('videoplayer',-10.00);
+    }
+    else if (e.keyCode == '39') {
+       jumptotime('videoplayer',+10.00);
+    }
+
+}
+
+
 </script>
 
