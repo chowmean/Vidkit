@@ -17,15 +17,13 @@
   
 
 </video >
-  <div id="cover"><a id="play_pause"href="#play"><i class="medium material-icons right" onclick="playvid('videoplayer')">play_circle_filled</i></a><a href="#mute" id="mute_unmute"><i class="medium material-icons right" onclick="mute('videoplayer')">volume_off</i></a><p class="medium range-field right">
+  <div id="cover"><a id="play_pause"href="#play"><i class="medium material-icons right" onclick="playvid('videoplayer')">play_circle_filled</i></a><a href="#mute" id="mute_unmute"><i class="medium material-icons right" onclick="mute('videoplayer')">volume_off</i></a><p class="medium range-field left">
       <input onclick="changerange('videoplayer')" type="range" id="position_video" min="0" max="100" />
+    </p><p class="medium range-field right">
+      <input onclick="changevolume('videoplayer')" type="range" id="position_volume" min="0" max="10" />
     </p></div>
 </div>
-<toolbar>
-  <button onclick="playvid('videoplayer')">Play the Audio</button>
-  <button onclick="jumptotime('videoplayer',10.00)">Jump 10sec</button>
-  <button onclick="jumptotime('videoplayer',-10.00)">Back 10sec</button>
-</toolbar>
+
 
 
 <style>
@@ -94,17 +92,12 @@ else{document.getElementById(b).pause();
 }
 
 
-var increasevol=function(b)
-{
-document.getElementById(b).volume+=0.1;
-
-cur_volume=document.getElementById(b).volume;
-}
 
 var mute=function(b)
 {
 document.getElementById(b).volume=0;
 document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons right" onclick="unmute('+"'videoplayer'"+')">volume_mute</i>';
+document.getElementById('position_volume').value=0;
 }
 
 
@@ -112,6 +105,7 @@ var unmute=function(b)
 {
 document.getElementById(b).volume=cur_volume;
 document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons right" onclick="mute('+"'videoplayer'"+')">volume_off</i>';
+document.getElementById('position_volume').value=cur_volume*10;
 }
 
 
@@ -119,8 +113,18 @@ var decreasevol=function(b)
 {
 document.getElementById(b).volume-=0.1;
 cur_volume=document.getElementById(b).volume;
+document.getElementById('position_volume').value=cur_volume*10;
 }
 
+
+
+var increasevol=function(b)
+{
+document.getElementById(b).volume+=0.1;
+
+cur_volume=document.getElementById(b).volume;
+document.getElementById('position_volume').value=cur_volume*10;
+}
 
 var jumptotime=function(b,a)
 {
@@ -138,11 +142,16 @@ pos=(cur_time/total)*100;
 document.getElementById('position_video').value=pos;
 }
 
-
+var changevolume=function(b)
+{
+document.getElementById(b).volume=document.getElementById('position_volume').value/10;
+cur_volume=document.getElementById(b).volume;
+console.log(cur_volume);
+}
 
 var changerange=function(b)
 {
-total=document.getElementById(b).duration;
+
 pos=document.getElementById('position_video').value;
 document.getElementById(b).currentTime=(pos/100)*total;
 }
