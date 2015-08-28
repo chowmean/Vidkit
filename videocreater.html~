@@ -17,8 +17,8 @@
   
 
 </video >
-  <div id="cover"><a id="play_pause"href="#play"><i class="medium material-icons" onclick="playvid('videoplayer')">play_circle_filled</i></a><a href="#mute" id="mute_unmute"><i class="medium material-icons" onclick="mute('videoplayer')">volume_off</i></a><p class="range-field">
-      <input type="range" id="position_video" min="0" max="100" />
+  <div id="cover"><a id="play_pause"href="#play"><i class="medium material-icons right" onclick="playvid('videoplayer')">play_circle_filled</i></a><a href="#mute" id="mute_unmute"><i class="medium material-icons right" onclick="mute('videoplayer')">volume_off</i></a><p class="medium range-field right">
+      <input onclick="changerange('videoplayer')" type="range" id="position_video" min="0" max="100" />
     </p></div>
 </div>
 <toolbar>
@@ -39,7 +39,7 @@ width:100%;
 {
 position:absolute;
 z-index:100;
-top:0%;
+bottom:0%;
 width:100%;
 height:60px;
 left:0%;
@@ -52,6 +52,7 @@ toolbar{
 position:absolute;
 top:100%;
 }
+
 </style>
 
 
@@ -68,9 +69,10 @@ var initialize=function(b)
 {
 document.getElementById(b).volume=0.5;
 document.getElementById(b).play();
-document.getElementById('play_pause').innerHTML='<i class="medium material-icons center" onclick="playvid('+"'videoplayer'"+')">pause_circle_filled</i>';
+document.getElementById('play_pause').innerHTML='<i class="medium material-icons right" onclick="playvid('+"'videoplayer'"+')">pause_circle_filled</i>';
 a=1;
 console.log(document.getElementById(b).currentTime);
+
 }
 
 
@@ -79,12 +81,12 @@ var playvid=function(b)
 
 if(a==0)
 	{document.getElementById(b).play();
-	document.getElementById('play_pause').innerHTML='<i class="medium material-icons center" onclick="playvid('+"'videoplayer'"+')">pause_circle_filled</i>';
+	document.getElementById('play_pause').innerHTML='<i class="medium material-icons right" onclick="playvid('+"'videoplayer'"+')">pause_circle_filled</i>';
 	a=1;
 	
 	}
 else{document.getElementById(b).pause();
-	document.getElementById('play_pause').innerHTML='<i class="medium material-icons center" onclick="playvid('+"'videoplayer'"+')">play_circle_filled</i>';
+	document.getElementById('play_pause').innerHTML='<i class="medium material-icons right" onclick="playvid('+"'videoplayer'"+')">play_circle_filled</i>';
 	a=0;
 	}
 	
@@ -102,15 +104,14 @@ cur_volume=document.getElementById(b).volume;
 var mute=function(b)
 {
 document.getElementById(b).volume=0;
-document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons center" onclick="unmute('+"'videoplayer'"+')">volume_mute</i>';
-
+document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons right" onclick="unmute('+"'videoplayer'"+')">volume_mute</i>';
 }
 
 
 var unmute=function(b)
 {
 document.getElementById(b).volume=cur_volume;
-document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons center" onclick="mute('+"'videoplayer'"+')">volume_off</i>';
+document.getElementById('mute_unmute').innerHTML='<i class="medium material-icons right" onclick="mute('+"'videoplayer'"+')">volume_off</i>';
 }
 
 
@@ -129,12 +130,25 @@ document.getElementById(b).currentTime+=a;
 initialize('videoplayer');
 
 
+var updaterange=function(b)
+{
+total=document.getElementById(b).duration;
+cur_time=document.getElementById(b).currentTime;
+pos=(cur_time/total)*100;
+document.getElementById('position_video').value=pos;
+}
 
 
 
+var changerange=function(b)
+{
+total=document.getElementById(b).duration;
+pos=document.getElementById('position_video').value;
+document.getElementById(b).currentTime=(pos/100)*total;
+}
 
 
-
+setInterval(function(){updaterange('videoplayer');}, 1);
 //===================key events
 
 
@@ -155,6 +169,9 @@ function checkKey(e) {
     }
     else if (e.keyCode == '39') {
        jumptotime('videoplayer',+10.00);
+    }
+    else if (e.keyCode == '32') {
+       playvid('videoplayer');
     }
 
 }
