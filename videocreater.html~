@@ -11,13 +11,13 @@
 <link href="icon.css" rel="stylesheet">
 
 
-<div id="video_container">
-<video id="videoplayer" class="z-depth-3" src="test.mp4" onclick="playvid('videoplayer')" style="position:absolute; width:100%;">
+<div id="video_container" >
+<video id="videoplayer" class="z-depth-3 circle" src="test.mp4" onclick="playvid('videoplayer')" style="position:absolute; width:100%;">
   Your browser does not support the <code>video</code> element.
   
 
 </video >
-  <div id="cover"><a id="play_pause"href="#play"><i class="medium material-icons right" onclick="playvid('videoplayer')">play_circle_filled</i></a><a href="#mute" id="mute_unmute"><i class="medium material-icons right" onclick="mute('videoplayer')">volume_off</i></a><p class="medium range-field left">
+  <div id="cover" ><a id="play_pause"href="#play"><i class="medium material-icons right" onclick="playvid('videoplayer')">play_circle_filled</i></a><a href="#mute" id="mute_unmute"><i class="medium material-icons right" onclick="mute('videoplayer')">volume_off</i></a><p class="medium range-field left">
       <input onclick="changerange('videoplayer')" type="range" id="position_video" min="0" max="100" />
     </p><p class="medium range-field right">
       <input onclick="changevolume('videoplayer')" type="range" id="position_volume" min="0" max="10" />
