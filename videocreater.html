@@ -12,18 +12,38 @@
 
 
 <div id="video_container" >
-<video id="videoplayer" class="z-depth-3 circle" src="test.mp4" onclick="playvid('videoplayer')" style="position:absolute; width:100%;">
+<video id="videoplayer" class="z-depth-3" src="test.mp4" onclick="playvid('videoplayer')" style="position:absolute; width:100%;">
   Your browser does not support the <code>video</code> element.
-  
-
 </video >
-  <div id="cover" ><a id="play_pause"href="#play"><i class="medium material-icons right" onclick="playvid('videoplayer')">play_circle_filled</i></a><a href="#mute" id="mute_unmute"><i class="medium material-icons right" onclick="mute('videoplayer')">volume_off</i></a><p class="medium range-field left">
-      <input onclick="changerange('videoplayer')" type="range" id="position_video" min="0" max="100" />
-    </p><p class="medium range-field right">
-      <input onclick="changevolume('videoplayer')" type="range" id="position_volume" min="0" max="10" />
+
+
+
+  <div id="cover" >
+  <a id="play_pause"href="#play" class="left"><i class="medium material-icons" onclick="playvid('videoplayer')">play_circle_filled</i></a>
+    
+  
+  <p class="range-field left" style="width:60%;">
+  
+    <input width="60%" style="width:100%;"onclick="changerange('videoplayer')" type="range" id="position_video" min="0" max="100" />
+  
+    </p>
+    <a href="#mute" id="mute_unmute"><i class="medium material-icons right" onclick="mute('videoplayer')">volume_off</i></a>
+  
+    
+    <p class="medium range-field right ">
+  
+    <input onclick="changevolume('videoplayer')" type="range"  id="position_volume" min="0" max="10" />
     </p></div>
+
 </div>
 
+
+<form id="player_det">
+
+<input type='text' value='' placeholder='Name'/>
+
+
+</form>
 
 
 <style>
@@ -37,10 +57,11 @@ width:100%;
 {
 position:absolute;
 z-index:100;
-bottom:0%;
+top:0%;
 width:100%;
-height:60px;
 left:0%;
+background:black;
+opacity:0.5
 }
 
 input{border:0px solid white;}
@@ -48,7 +69,7 @@ p{border:0px solid white;}
 
 toolbar{
 position:absolute;
-top:100%;
+top:0%;
 }
 
 </style>
@@ -209,4 +230,12 @@ function checkKey(e) {
 
 
 </script>
+
+<style>
+.vranger {
+  
+   transform: rotate(270deg);
+  -moz-transform: rotate(270deg); /*do same for other browsers if required*/
+}
+</style>
 
