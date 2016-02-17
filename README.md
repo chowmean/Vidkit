@@ -8,3 +8,4 @@ It has all the basic functionality.
 - [ ] Adding playlist feature.
 - [ ] Autoplay next song.
 - [ ] Give previous and next button.
+- [x] Play from the time last left.(Using localstorage)
