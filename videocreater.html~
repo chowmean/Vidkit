@@ -77,6 +77,9 @@ top:0%;
 
 
 <script>
+
+
+
 var a=0;
 var cur_volume=0.5;
 var max_vol=1.0;
@@ -90,8 +93,18 @@ document.getElementById(b).volume=0.5;
 document.getElementById(b).play();
 document.getElementById('play_pause').innerHTML='<i class="medium material-icons right" onclick="playvid('+"'videoplayer'"+')">pause_circle_filled</i>';
 a=1;
-console.log(document.getElementById(b).currentTime);
+if (localStorage.getItem("details_video") === null) {
+  ttt=0;
+  document.getElementById('videoplayer').currentTime=ttt;
+}
+else
+{
+console.log('redirecting');
+ttt=localStorage.getItem('details_video');
 
+setTimeout(function(){ jumptotime('videoplayer',parseFloat(ttt)); }, 100);
+}
+console.log(document.getElementById(b).currentTime);
 }
 
 
@@ -228,6 +241,14 @@ function checkKey(e) {
 
 }
 
+
+
+
+
+
+
+
+setInterval(function(){ console.log('storing');window.localStorage.setItem('details_video', document.getElementById('videoplayer').currentTime)}, 10000);
 
 </script>
 
