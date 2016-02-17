@@ -19,3 +19,7 @@ It has all the basic functionality.
 - Up Button to Increase the volume.
 - Down Button to Decrease the volume.
 - Press 'M' to mute and unmute.
+
+
+##Screenshot
+![LocateTweets](https://raw.githubusercontent.com/chowmean/vidkit/master/screen.png)
